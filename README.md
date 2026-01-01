@@ -1,76 +1,52 @@
-# ReqRes API Automation Framework
+
+# API Automation – ReqRes User Management
 
 ## 📌 Project Overview
 
-This project demonstrates an **automated API testing framework** for a **User Management workflow** using the public **ReqRes API** ([https://reqres.in/](https://reqres.in/)).
+This project demonstrates an **API Automation framework** using **Java, Rest Assured, TestNG**, and **Extent Reports** to validate a **User Management workflow** using the public **ReqRes API**.
 
-The framework validates the complete API lifecycle:
-
-* Create User
-* Update User
-* Get User (Verify Update)
-* Delete User
-* Get User (Verify Deletion)
-
-The solution is designed following **industry best practices** and is suitable for real-world API automation and CI/CD integration.
+The framework executes tests via **TestNG Runner XML** and generates an **HTML Extent Report** that can be opened in any browser.
 
 ---
 
-## 🛠 Tools & Technologies Used
+## 🛠 Tools & Technologies
 
-| Tool / Technology | Purpose                       |
-| ----------------- | ----------------------------- |
-| Java              | Programming language          |
-| Rest Assured      | API automation library        |
-| TestNG            | Test execution & assertions   |
-| Maven             | Build & dependency management |
-| Allure Report     | Test execution reporting      |
-| Git               | Version control               |
+| Tool          | Purpose               |
+| ------------- | --------------------- |
+| Java          | Programming Language  |
+| Rest Assured  | API Automation        |
+| TestNG        | Test Framework        |
+| Maven         | Dependency Management |
+| Extent Report | HTML Test Reporting   |
+| IntelliJ IDEA | IDE                   |
 
 ---
 
 ## 🧪 Test Scenarios Covered
 
-### 1️⃣ Create User
+1. **Create User**
 
-* **Endpoint:** `POST /api/users`
-* **Input:** Name & Job
-* **Validation:**
+   * `POST /users`
+   * Capture user ID from response
 
-  * Status code = 201
-  * User ID is generated and stored for further requests
+2. **Update User**
 
-### 2️⃣ Update User
+   * `PUT /users/{id}`
+   * Update job field
 
-* **Endpoint:** `PUT /api/users/{id}`
-* **Validation:**
+3. **Get User**
 
-  * Status code = 200
-  * Job updated successfully
+   * `GET /users/{id}`
+   * Verify updated job
 
-### 3️⃣ Get User (Verify Update)
+4. **Delete User**
 
-* **Endpoint:** `GET /api/users/{id}`
-* **Validation:**
+   * `DELETE /users/{id}`
 
-  * Status code = 200
-  * Updated job value is returned
+5. **Verify Deletion**
 
-### 4️⃣ Delete User
-
-* **Endpoint:** `DELETE /api/users/{id}`
-* **Validation:**
-
-  * Status code = 204
-
-### 5️⃣ Get User (Verify Deletion)
-
-* **Endpoint:** `GET /api/users/{id}`
-* **Validation:**
-
-  * Status code = 404 (User not found)
-
-> ⚠️ **Note:** ReqRes is a mock API. Some endpoints do not persist data, so validations focus on response contracts rather than real database persistence.
+   * `GET /users/{id}`
+   * Expect `404 Not Found`
 
 ---
 
@@ -78,67 +54,94 @@ The solution is designed following **industry best practices** and is suitable f
 
 ```
 api-automated-task/
-│   ├── extent-report
- 
+│
 ├── src/test/java
 │   ├── base
-│   │   └── Extendreportmanager.java
-        └── TestListener.java
-│   ├── utils
-│   │   └── AAIB-TASK.java
-        └── BaseTest.java
+│   │   ├── BaseTest.java
+│   │   ├── ExtentReportManager.java
+│   │   └── TestListener.java
+│   │
+│   └── AAIB_Task.java
 │
+├── extent-report
+│   └── AAIB-report.html
+│
+├── testng-runner.xml
 ├── pom.xml
 └── README.md
 ```
 
 ---
 
-## ⚙️ Framework Design
+## ⚙️ How Tests Are Executed
 
-### 🔹 BaseTest
-
-* Handles base URI configuration
-
-### 🔹 Test Class
-
-* Uses TestNG priorities to control execution order
-* Uses dynamic data (userId) for request chaining
-* Assertions validate both HTTP status codes and response content
+* Tests are executed using **TestNG Runner XML**
+* **Extent Report** is generated automatically after execution
+* Test execution includes request chaining and assertions
 
 ---
 
 ## ▶️ How to Run the Tests
 
-### Prerequisites
+### Option 1️⃣ Run Using IntelliJ
 
-* Java 11 or higher
-* Maven installed
-* Allure CLI installed
+1. Open `testng-runner.xml`
+2. Right-click → **Run 'testng-runner.xml'**
 
-
-
-## 📊 Test Reporting (Allure)
+---
 
 
-### Report Includes
+## 📊 Extent Report (HTML)
 
-* Test execution summary
-* Passed / Failed test cases
-* Request & response details
-* Execution timeline
+### 📍 Report Location
+
+```
+extent-report/AAIB-report.html
+```
+
+### 🔎 How to Open the Report
+
+1. Go to the `extent-report` folder
+2. Right-click `AAIB-report.html`
+3. **Copy Path**
+4. Paste it into **any browser** (Chrome, Edge, Firefox)
+
+✔️ The report opens as a full interactive HTML page
 
 ---
 
 ## 🔐 Headers Used
 
-All requests include the following headers:
+All API requests include:
 
 ```
 Content-Type: application/json
 x-api-key: reqres_366d4ca18b4342a2b77789cdbc39e6e0
 ```
+
+---
+
+## 📈 Reporting Features
+
+* Test execution status (Pass / Fail)
+* Step-by-step API flow
+* Failure screenshots/logs (if added later)
+* Execution time
+
+---
+
+
 ## 👤 Author
 
 **Abdelrhman Tawfik**
-Software Test Engineer (Manual & Automation)
+Software Test Engineer
+
+---
+
+## ✅ Conclusion
+
+This project demonstrates a **professional, scalable API automation framework** using:
+
+* TestNG Runner XML
+* Rest Assured
+* Extent HTML Reporting
