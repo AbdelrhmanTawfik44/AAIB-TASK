@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Ecommerce Automation Suite" parallel="false">
+
+    <listeners>
+
+        <listener class-name="base.TestListener" />
+
+    </listeners>
+    <test name="E2E Test Flow">
+        <classes>
+            <class name="AAIB_Task" />
+        </classes>
+    </test>
+</suite>
